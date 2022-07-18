@@ -59,7 +59,7 @@ pipeline {
            
            stage('QA Deploy') {
                steps {
-                   deploy adapters: [tomcat9(credentialsId: '83ae2608-f318-4b3f-832b-223cbd309227', path: '', url: http://ec2-3-135-244-151.us-east-2.compute.amazonaws.com:8080/'')], contextPath: null, war: '**/*.war'
+                   deploy adapters: [tomcat9(credentialsId: '83ae2608-f318-4b3f-832b-223cbd309227', path: '', url: http://ec2-3-135-244-151.us-east-2.compute.amazonaws.com:8080/')], contextPath: null, war: '**/*.war'
                }
            }
            
