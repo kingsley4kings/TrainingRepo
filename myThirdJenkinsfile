@@ -30,19 +30,19 @@ pipeline {
            
            stage('Nexus Upload') {
             steps {
-                nexusArtifactUploader artifacts: [[artifactId: 'MyTechWebApp', classifier: '', file: 'MyTechWebApp/target/MyTechWebApp.war', type: 'war']], credentialsId: '5747629a-6b45-4b28-99be-1db78b1f9706', groupId: 'com.dept.app', nexusUrl: 'ec2-3-128-28-103.us-east-2.compute.amazonaws.com:8081', nexusVersion: 'nexus3', protocol: 'http', repository: 'maven-snapshots', version: '1.0-SNAPSHOT'
+                nexusArtifactUploader artifacts: [[artifactId: 'MyTechWebApp', classifier: '', file: 'MyTechWebApp/target/MyTechWebApp.war', type: 'war']], credentialsId: '5747629a-6b45-4b28-99be-1db78b1f9706', groupId: 'com.dept.app', nexusUrl: 'ec2-3-145-215-65.us-east-2.compute.amazonaws.com:8081', nexusVersion: 'nexus3', protocol: 'http', repository: 'maven-snapshots', version: '1.0-SNAPSHOT'
             }
            }
            
            stage('Dev Deploy') {
                steps {
-                   deploy adapters: [tomcat9(credentialsId: '83ae2608-f318-4b3f-832b-223cbd309227', path: '', url: 'http://ec2-3-15-194-123.us-east-2.compute.amazonaws.com:8080')], contextPath: null, war: '**/*.war'
+                   deploy adapters: [tomcat9(credentialsId: '83ae2608-f318-4b3f-832b-223cbd309227', path: '', url: 'http://ec2-18-223-97-159.us-east-2.compute.amazonaws.com:8080')], contextPath: null, war: '**/*.war'
                }
            }
            
            stage('slack notify') {
                steps {
-                   slackSend channel: 'jenkins3jobs', message: 'DEV Training test job was successful and fine'
+                   slackSend channel: 'jenkins3jobs', message: 'DEV Training test job was accomplished'
                }
            }
            
@@ -57,13 +57,13 @@ pipeline {
            
            stage('QA Deploy') {
                steps {
-                   deploy adapters: [tomcat9(credentialsId: '83ae2608-f318-4b3f-832b-223cbd309227', path: '', url: 'http://ec2-3-15-194-123.us-east-2.compute.amazonaws.com:8080')], contextPath: null, war: '**/*.war'
+                   deploy adapters: [tomcat9(credentialsId: '83ae2608-f318-4b3f-832b-223cbd309227', path: '', url: 'http://ec2-18-223-97-159.us-east-2.compute.amazonaws.com:8080')], contextPath: null, war: '**/*.war'
                }
            }
            
            stage('slack notify QA') {
                steps {
-                   slackSend channel: 'jenkins3jobs', message: 'QA Training test deployment was successful please start your testing'
+                   slackSend channel: 'jenkins3jobs', message: 'QA Training test deployment was awesome, please proceed'
            
              }
             } 
